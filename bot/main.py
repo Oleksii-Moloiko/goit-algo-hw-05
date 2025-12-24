@@ -20,22 +20,14 @@ def input_error(func: Callable):
             return "Not enough arguments provided."
     return inner
 
-def args_required(func):
-    def  inner(args, *rest):
-        if not args:
-            return "Enter the argument for the command"
-        return func(args, *rest)
-    return inner
 
 @input_error
-@args_required
 def add_contact(args, contacts):
     name, phone = args  # може кинути ValueError якщо args не 2
     contacts[name] = phone
     return "Contact added."
 
 @input_error
-@args_required
 def change_contact(args, contacts):
     name, phone = args  # ValueError якщо args не 2
     if name in contacts:
@@ -45,11 +37,8 @@ def change_contact(args, contacts):
 
 
 @input_error
-@args_required
 def show_phone(args, contacts):
     name = args[0]  # IndexError якщо порожньо
-    if name not in contacts:
-        raise KeyError
     return contacts[name]
 
 
