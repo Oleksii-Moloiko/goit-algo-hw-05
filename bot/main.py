@@ -29,8 +29,8 @@ def add_contact(args, contacts):
 
 @input_error
 def change_contact(args, contacts):
-    name, phone = args  # ValueError якщо args не 2
-    if name in contacts:
+    name, phone = args
+    if name not in contacts:
         raise KeyError
     contacts[name] = phone
     return "Contact updated."
